@@ -3,6 +3,7 @@ from django.db import models
 from django.urls import reverse
 from django.db import models
 from django.contrib.auth import get_user_model
+from accounts.models import Profile
 
 
 # Create your models here.
@@ -10,7 +11,7 @@ from django.contrib.auth import get_user_model
 
 class Properties(models.Model):
     Property_Name = models.CharField(max_length=50,blank=False, null=False, default=' ')
-    Property_Description = models.CharField(max_length=50,blank=False, null=False, default=' ')
+    Property_Description = models.CharField(max_length=50,blank=True, null=True, default=' ')
     Property_Guest_Capacity = models.CharField(max_length=50, blank=True, null=True,default=' ')
     Property_Street = models.CharField(max_length=50, blank=True, null=True,default=' ')
     Property_City = models.CharField(max_length=50, blank=True, null=True,default=' ')
@@ -19,8 +20,14 @@ class Properties(models.Model):
     No_of_Rooms = models.CharField(max_length=50, blank=True, null=True,default=' ')
     No_of_Bathrooms = models.CharField(max_length=50, blank=True, null=True,default=' ')
     Total_Area = models.CharField(max_length=50, blank=True, null=True,default=' ')
-    Garage_Size = models.CharField(max_length=50, blank=True, null=True,default=' ')
+    Garage_Capacity = models.CharField(max_length=50, blank=True, null=True,default=' ')
     No_of_Floors = models.CharField(max_length=50, blank=True, null=True,default=' ')
+    Available_Areas=models.CharField(max_length=200,blank=True, null=True, default=' ')
+    Property_Host=models.ForeignKey(get_user_model(),on_delete=models.CASCADE)
+    Property_Image=models.ImageField(upload_to='Images',null=True,blank=True)
+    County=models.CharField(max_length=50, blank=True, null=True,default=' ')
+    Adults=models.IntegerField()
+    Children=models.IntegerField()
 
     def __str__(self):
         return self.Property_Name
@@ -29,9 +36,10 @@ class Properties(models.Model):
 # Create your models here.
 class Property_Availability(models.Model):
     Property_Name = models.ForeignKey(Properties,on_delete=models.CASCADE)
-    Available = models.CharField(max_length=50, default=' ', null=True, blank=True)
-    Availability_StartTime=models.DateTimeField(blank=True, null=True)
-    Availability_EndTime=models.DateTimeField(blank=True, null=True)
+    IsAvailable = models.BooleanField(default=False)
+    StartTime=models.DateTimeField(blank=True, null=True)
+    EndTime=models.DateTimeField(blank=True, null=True)
+    Availability_Comments=models.CharField(max_length=50, default=' ', null=True, blank=True)
 
 class Property_Status(models.Model):
     Property_Name = models.ForeignKey(Properties,on_delete=models.CASCADE)
@@ -50,6 +58,7 @@ class Reservation(models.Model):
     Date_From = models.DateTimeField(blank=True, null=True)
     Date_To = models.DateTimeField(blank=True, null=True)
     No_Of_Guest = models.IntegerField(null=True, blank=True)
+    Status=models.CharField(max_length=50, default=' ', null=True, blank=True)
 
 
 class Transaction(models.Model):

@@ -1,0 +1,223 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <!-- Required meta tags-->
+    <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.js"></script>
+  <link href="{% static 'vendor/fonts/glyphicons-halflings-regular.eot' %}" rel="stylesheet">
+  <link href="{% static 'vendor/fonts/glyphicons-halflings-regular.svg' %}" rel="stylesheet">
+  <link href="{% static 'vendor/fonts/glyphicons-halflings-regular.ttf' %}" rel="stylesheet">
+  <link href="{% static 'vendor/fonts/glyphicons-halflings-regular.woff' %}" rel="stylesheet">
+
+
+
+
+  <title>Property Management</title>
+
+
+    <!-- Font special for pages-->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i" rel="stylesheet">
+
+  <!-- Icons font CSS-->
+    <link href="{% static 'vendor/mdi-font/css/material-design-iconic-font.min.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'vendor/font-awesome-4.7/css/font-awesome.min.css' %}" rel="stylesheet" media="all">
+
+  <!-- Bootstrap core CSS -->
+
+  <!-- Custom styles for this template -->
+  <link href="{% static 'css/main.css' %}" rel="stylesheet">
+  <link href="{% static 'vendor/select2/select2.min.css' %}" rel="stylesheet" media="all">
+  <link href="{% static 'vendor/datepicker/daterangepicker.css' %}" rel="stylesheet" media="all">
+
+
+
+<   <script>
+    var date = new Date();
+    var currentMonth = date.getMonth();
+    var currentDate = date.getDate();
+    var currentYear = date.getFullYear();
+$('input[name="daterange"]').daterangepicker({
+    minDate: new Date(currentYear, currentMonth, currentDate)
+    , dateFormat: 'yy-mm-dd'
+    , startDate: moment(date).add(1,'days')
+    , endDate: moment(date).add(2,'days')
+    , isInvalidDate: function(ele) {
+        var currDate = moment(ele._d).format('YY-MM-DD');
+        return ["17-04-20"].indexOf(currDate) != -1;
+    }
+    , locale: {
+        format: 'DD.MM.YYYY'
+    }
+});
+
+</script>
+    <!-- Main JS-->
+
+
+<style>
+.row {
+  display: flex;
+  padding:1px;
+}
+
+.column {
+  flex: 33.33%;
+  padding: 5px;
+}
+
+.alignleft {
+	float: left;
+}
+.alignright {
+	float: right;
+
+
+</style>
+
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href=/>Property Rental Management System</a>
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'airbnbapp:aboutus' %}">About</a>
+
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'airbnbapp:contact' %}">Contact</a>
+          </li>
+          <li class="nav-item">
+              {% if user.is_authenticated %}
+                        <li class="nav-item">
+
+                  <a class="nav-link" href=/home>Home</a>
+        </li>
+                      <li class="nav-item">
+
+                  <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+        </li>
+              {% else %}
+                  <a class="nav-link" href="{% url 'login' %}">Login</a>
+                  <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPortfolio" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Sign Up
+                  </a>
+                  <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownPortfolio">
+                   <a class="dropdown-item" href="{% url 'guest_register' %}">Guest</a>
+                   <a class="dropdown-item" href="{% url 'host_register' %}">Host</a>
+                   <a class="dropdown-item" href="{% url 'maintenance_register' %}">Maintenance</a>
+                  </div>
+
+              {% endif %}
+           </li>
+
+          </li>
+
+
+
+
+          </ul>
+      </div>
+    </div>
+  </nav>
+ <div class="container-1">
+    <!-- Portfolio Section -->
+<div class="page-wrapper bg-color-1 p-t-275 p-b-120">
+        <div class="wrapper wrapper--w1070">
+
+                      {% for property_list in property_list %}
+
+
+    <div class="row">
+
+                   <div class="col-lg-4 col-sm-6 portfolio-item">
+                       <div class="card h-100 card-7" style="width: 800px;">
+                         <div class="card-header pt-3" style="width: 800px;">
+                             <h5><b>{{property_list.Property_Name}}</b></h5>
+
+                         </div>
+
+  <div class="card-body" style="width: 800px;">
+      <h5 class="card-title pt-3"><b>{{property_list.Property_Description}}</b></h5>
+         <div class="row">
+            <div class="column">
+              <a href="#"><img class="card-img-top" src={{property_list.Property_Image.url}} alt=""style="width: 500px;"></a>
+            </div>
+         </div>
+      <P> </P>
+      <p class="card-text pt-3"><h4>{{property_list.Available_Areas}} hosted by {{property_list.Property_Host}}.</h4></p>
+      <p> </p>
+      <p class="card-text pt-3 pb-4 alignleft"><b>{{property_list.Property_Guest_Capacity}} guest. {{property_list.No_of_Rooms}} beds. {{property_list.No_of_Bathrooms}} baths.</b></p>
+      <p class="card-text pt-3 pb-4 alignright"><b>{{property_list.Price}}</b></p>
+      <div style="clear: both;"></div>
+      <div class="row">
+      <div class="input-group input--medium ">
+          <label class="label">Check-In</label>
+          <input class="input--style-1" type="text" name="checkin" placeholder="mm/dd/yyyy" id="input-start">
+      </div>
+      <div class="input-group input--medium pt-3">
+          <label class="label">Check-Out</label>
+          <input class="input--style-1" type="text" name="checkout" placeholder="mm/dd/yyyy" id="input-end">
+      </div>
+      </div>
+     <a class="btn btn-primary" href="{% url 'airbnbapp:reserve' property_list.id %}" role="button">Add Properties</a>
+
+  </div>
+                                  </div>
+                             </div>
+
+    </div>
+            {% endfor %}
+        </div>
+
+ </div>
+    !-- Jquery JS-->
+    <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+    <!-- Vendor JS-->
+    <script src="{% static 'vendor/select2/select2.min.js' %}"></script>
+    <script src="{% static 'vendor/jquery-validate/jquery.validate.min.js' %}"></script>
+    <script src="{% static 'vendor/bootstrap-wizard/bootstrap.min.js' %}"></script>
+    <script src="{% static 'vendor/bootstrap-wizard/jquery.bootstrap.wizard.min.js' %}"></script>
+    <script src="{% static 'vendor/datepicker/moment.min.js' %}"></script>
+    <script src="{% static 'vendor/datepicker/daterangepicker.js' %}"></script>
+
+    <script src="{% static 'js/global.js' %}"></script>
+
+     <div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Modal Header</h4>
+      </div>
+      <div class="modal-body">
+        <p>Some text in the modal.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+ </body>

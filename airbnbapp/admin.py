@@ -14,7 +14,7 @@ class PropertyAdmin(admin.ModelAdmin):
 
 class PropertyAvailabilityAdmin(admin.ModelAdmin):
     model = Property_Availability
-    list_display = ['Property_Name','Available','Availability_StartTime','Availability_EndTime']
+    list_display = ['Property_Name','IsAvailable','StartTime','EndTime']
 
 
 class PropertyStatusAdmin(admin.ModelAdmin):
