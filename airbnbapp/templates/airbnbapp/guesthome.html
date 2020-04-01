@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+  {% block content %}
+
+
+                <!--Grid row-->
+                  <!--Grid column-->
+                  <!--Grid column-->
+                  <!--Grid column-->
+
+<div class="container">
+
+    <div class="card " data-wow-delay="0.3s">
+        <h4 class="card-header">Hello {{ user.get_username }},</h4>
+
+        <h5 class="card-body">
+            <p>Please click on My Bookings to view your current reservations with us.</p>
+        </h5>
+
+   <p class="lead">
+   <div class="card-footer text-center">
+            <a class="btn btn-primary btn-lg float-right" href="{% url 'airbnbapp:viewbookings' id=user.id %}" role="button">My Bookings</a>
+
+    </div>
+  </p>
+</div>
+</div>
+
+
+
+get
+{% endblock %}
+
+
