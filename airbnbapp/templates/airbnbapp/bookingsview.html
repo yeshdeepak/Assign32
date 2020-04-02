@@ -124,21 +124,27 @@
                                   <th>Guests</th>
                                   <th>Status</th>
                                   <th>Cancel</th>
-                                  <th>View</th>
 
                               </tr>
                               <tr>
                                   {% for booking in bookings %}
+                                   <tr>
                                    <td>{{booking.id}}</td>
                                    <td>{{booking.Property_Name}}</td>
                                    <td>{{booking.Date_From}}</td>
                                    <td>{{booking.Date_To}}</td>
                                    <td>{{booking.No_Of_Guest}}</td>
                                    <td>{{booking.Status}}</td>
-                                  <td><a href="{% url 'airbnbapp:cancelbooking'  id=booking.Customer_Name bid=booking.id  %}"> Cancel </a></td>
-                                  <td><a href="{% url 'airbnbapp:viewproperty' name=booking.Property_Name id=booking.Customer_Name %}"> Update </a></td>
+                                  <td>
+                                      <form action="{% url 'airbnbapp:cancelbooking' id=booking.id %}" method="POST" class="d-inline">
+                                          {% csrf_token %}
+                                          <button type="submit" class="btn">
+                                              <i class=""far fa-trash-alt fa-lg text-danger float-right"></i>
+                                          </button>
+                                      </form>
+                                      <a href="{% url 'airbnbapp:cancelbooking' id=booking.id %}"> Cancel </a></td>
 
-
+                          </tr>
                                   {% endfor %}
 
 

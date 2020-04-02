@@ -4,8 +4,11 @@ from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, redirect
 from .models import Properties,Reservation,Property_Availability,Reservation
 from django.contrib.auth.decorators import login_required
-from .forms import PropertiesForm,PropertiesSearchForm,AvailabilityForm
+from .forms import PropertiesForm,AddMaintenanceForm
 from .filters import propertyfilter
+from accounts.models import CustomUser
+from accounts.forms import UserLoginForm
+import datetime
 
 
 
@@ -23,8 +26,6 @@ def base(request):
         check_in=request.GET.get('date_min')
         check_out=request.GET.get('date_max')
 
-        print("location is" ,county,adult,child)
-
         if county is not None and county != "":
             property_list = Properties.objects.filter(County=county )& Properties.objects.filter(Adults__gte=adult )& Properties.objects.filter(Children__gte=child )
             context = {'property_list': property_list}
@@ -33,19 +34,47 @@ def base(request):
         else:
             return render(request, "base.html", context)
 
-        print("location is" ,county,adult,child)
         return render(request, "base.html", context)
 
     else:
        return render(request,"base.html",context)
 
-def propertyview(request,id=0):
+def propertyview(request,id):
     context={'property_list':Properties.objects.get(pk=id)}
-    return render(request,"airbnbapp/propertyview.html",context)
+    print("request",request.method)
+    if request.method == 'GET':
+        print(request.GET)
+        from_date = request.GET.get('checkin')
+        to_date = request.GET.get('checkout')
+        prop = Properties.objects.get(pk=id)
+        propid=id
+        userid=request.user
+        print ("user is",userid)
 
-def reserve(request,id):
-    return render(request,"airbnbapp/reserve.html")
 
+        if from_date is not None and from_date != '' :
+
+                reservation = Reservation()
+                reservation.Date_From = datetime.datetime.strptime(from_date, "%m/%d/%Y").strftime('%Y-%m-%d')
+                reservation.Date_To = datetime.datetime.strptime(to_date, "%m/%d/%Y").strftime('%Y-%m-%d')
+                reservation.Property_Name = Properties.objects.get(pk=propid)
+                if request.user.is_authenticated:
+                     reservation.Customer_Name = CustomUser.objects.get(username=userid)
+                     reservation.save()
+                     reserve_id = reservation.id
+                     prop = Properties.objects.get(pk=propid)
+                     reserve = Reservation.objects.get(pk=reserve_id)
+                     context = {'prop': prop, 'reserve': reserve}
+                     return render(request, "airbnbapp/reserve.html", context)
+                else:
+                     form = UserLoginForm()
+                     return render(request, 'accounts/login.html', {'form': form})
+
+        else:
+                return render(request, "airbnbapp/propertyview.html", context)
+
+    else:
+       return render(request,"airbnbapp/propertyview.html",context)
 
 
 
@@ -63,13 +92,11 @@ def viewbookings(request,id):
     return render(request, 'airbnbapp/bookingsview.html',{'bookings': bookings})
 
 
-def cancelbooking(request,bid,id):
-    bookings=Reservation.objects.get(id =bid)
-    if request.method=='POST':
-        bookings.delete()
-        return redirect('bookings/<bid>')
-    context={'item':bookings}
-    return render(request, 'airbnbapp/cancelbooking.html',context)
+def cancelbooking(request,id):
+    bookings=Reservation.objects.get(pk=id)
+    bookings.delete()
+    return redirect('/home')
+
 
 def viewproperty(request,name,id):
     property_list=Properties.objects.get(Property_Name=name)
@@ -108,10 +135,17 @@ def deleteproperty(request,id=0):
     return redirect('/home')
 
 
-def search(request):
-    if request.method == 'POST':
-        form = PropertiesSearchForm()
-        print (form)
+def addmaintenance(request,id):
+    if request.method == 'GET':
+        form = AddMaintenanceForm(initial={'Property_Name': id})
+        return render(request, 'airbnbapp/addmaintenance.html', {'form': form})
+
+    else:
+        form = AddMaintenanceForm(request.POST)
+        if form.is_valid():
+            print('printing post', request.POST)
+            form.save()
+            return redirect('/home')
 
 
 @login_required

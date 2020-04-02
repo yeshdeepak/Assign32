@@ -166,24 +166,33 @@ $('input[name="daterange"]').daterangepicker({
       <p class="card-text pt-3 pb-4 alignleft"><b>{{property_list.Property_Guest_Capacity}} guest. {{property_list.No_of_Rooms}} beds. {{property_list.No_of_Bathrooms}} baths.</b></p>
       <p class="card-text pt-3 pb-4 alignright"><b>{{property_list.Price}}</b></p>
       <div style="clear: both;"></div>
-      <div class="row">
+      <form method="GET">
+
+
+      <div class="form-row">
       <div class="input-group input--medium ">
           <label class="label">Check-In</label>
-          <input class="input--style-1" type="text" name="checkin" placeholder="mm/dd/yyyy" id="input-start">
+          <input class="input--style-1" type="text" name="checkin" placeholder="mm/dd/yyyy" id="input-start" >
       </div>
       <div class="input-group input--medium pt-3">
           <label class="label">Check-Out</label>
-          <input class="input--style-1" type="text" name="checkout" placeholder="mm/dd/yyyy" id="input-end">
+          <input class="input--style-1" type="text" name="checkout" placeholder="mm/dd/yyyy" id="input-end" >
+
       </div>
       </div>
-     <a class="btn btn-primary" href="{% url 'airbnbapp:reserve' property_list.id %}" role="button">Add Properties</a>
+
+                                                <button class="btn btn-primary" type="submit">Reserve</button>
+
+      </form>
+      </div>
+
 
   </div>
                                   </div>
                              </div>
 
     </div>
-            {% endfor %}
+    {% endfor %}
         </div>
 
  </div>

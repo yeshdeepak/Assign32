@@ -3,7 +3,7 @@ from crispy_forms.layout import Layout, HTML
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
-from .models import Properties,Property_Availability
+from .models import Properties,Property_Availability,Property_Status
 
 
 
@@ -12,7 +12,7 @@ class PropertiesForm(forms.ModelForm):
     class Meta:
         model=Properties
         fields = ('Property_Name','Property_Description','Property_Guest_Capacity','Property_Street','Property_City','Property_State','Price','No_of_Rooms',
-                  'No_of_Bathrooms','Total_Area','Garage_Capacity','No_of_Floors','Available_Areas','Property_Host','Property_Image')
+                  'No_of_Bathrooms','Total_Area','Garage_Capacity','No_of_Floors','Available_Areas','Property_Host','Property_Image','County','Adults','Children')
         labels= {'Property_Name': 'Property Name',
                  'Property_Description':'Description',
                  'Property_Guest_Capacity': 'Guests',
@@ -27,7 +27,10 @@ class PropertiesForm(forms.ModelForm):
                  'No_of_Floors': 'Floors',
                  'Available_Areas': 'Avilable Area',
                  'Property_Host': 'Host',
-                 'Property_Image': 'Photo'
+                 'Property_Image': 'Photo',
+                  'County': 'County',
+                    'Aduts':'Adults',
+                'Children':'Children'
         }
 
     def __init__(self, *args, **kwargs):
@@ -43,26 +46,18 @@ class PropertiesForm(forms.ModelForm):
             'flag_featured',
         )
 
+class AddMaintenanceForm(forms.ModelForm):
+  class Meta:
 
+    model = Property_Status
+    fields = ('Property_Name',  'Property_Status_Description', 'Expenses',
+              'Maintenance_ID')
+    labels = {'Property_Name': 'Property Name',
+              'Property_Status_Description': 'Description',
+              'Expenses': 'Maintenance Charges',
+              'Maintenance_ID': 'Maintenance Staff',
 
-class PropertiesSearchForm(forms.ModelForm):
-
-    class Meta:
-        model=Properties
-        fields = ('County','Adults','Children')
-        labels = {'County': 'Anywhere',
-                  'Adults': 'Adults',
-                  'Children':'Children'}
-
-
-class AvailabilityForm(forms.Form):
-
-        CheckIn = forms.CharField(widget=forms.widgets.DateTimeInput(attrs={"type": "date"}))
-        CheckOut = forms.CharField(widget=forms.widgets.DateTimeInput(attrs={"type": "date"}))
-        labels = {'CheckIn': 'Check In',
-                  'CheckOut': 'Check Out'}
-
-
+              }
 
 
 

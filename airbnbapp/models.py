@@ -24,7 +24,7 @@ class Properties(models.Model):
     No_of_Floors = models.CharField(max_length=50, blank=True, null=True,default=' ')
     Available_Areas=models.CharField(max_length=200,blank=True, null=True, default=' ')
     Property_Host=models.ForeignKey(get_user_model(),on_delete=models.CASCADE)
-    Property_Image=models.ImageField(upload_to='Images',null=True,blank=True)
+    Property_Image=models.ImageField(upload_to='Images',default='Images/home1.jpg')
     County=models.CharField(max_length=50, blank=True, null=True,default=' ')
     Adults=models.IntegerField()
     Children=models.IntegerField()

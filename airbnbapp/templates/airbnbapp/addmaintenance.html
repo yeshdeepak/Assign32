@@ -1,4 +1,5 @@
 {% load staticfiles %}
+{% load crispy_forms_tags %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -109,58 +110,51 @@
       </div>
     </div>
   </nav>
+
+  <div class="container">
+      <div class="row pt-5">
+          <div class="card-body">
+
             <!-- Full Page Intro -->
-  <div class="row pt-5 pl-5">
-      <div class="col-md-9 ">
-<div class="jumbotron pt-5">
-      <h1 class="display-4">Hello{{ props.Property_Host }}</h1>
+<form action="" method="POST" >
+    {% csrf_token %}
 
-  <p class="lead">Please scroll below to view your properties with us.</p>
-  <p class="lead">
-    <a class="btn btn-primary btn-lg" href="{% url 'airbnbapp:Addproperty' %}" role="button">Add Properties</a>
-  </p>
-</div>
-</div>
+ <div class="form-row">
+      <div class="form-group col-md-8 mb-0">
+        {{ form.Property_Name|as_crispy_field }}
+      </div>
+ </div>
+   <div class="form-row">
 
-          {% for prop in props %}
-                      <div class="row pt-5 pl-5">
+            <div class="form-group col-md-8 mb-0">
+        {{ form.Property_Status_Description|as_crispy_field }}
+      </div>
+     </div>
+     <div class="form-row">
 
+                 <div class="form-group col-md-8 mb-0">
+        {{ form.Expenses|as_crispy_field }}
+      </div>
 
-                   <div class="col-lg-4 col-sm-6 portfolio-item">
-                      <div class="card h-100 "style="width: 800px;">
-                          <div class="card-header"><h5>{{prop.Property_Name}}</h5></div>
+     </div>
+     <div class="form-row">
 
-                      <div class="card-body">
-                                                 <h4 class="card-title">
-            </h4>
-            <p class="card-text"><b>{{prop.Property_Description}}</b></p>
-                                                 <a href=#><img class="card-img-top" src={{prop.Property_Image.url}} alt=""></a>
+                 <div class="form-group col-md-8 mb-0">
+        {{ form.Maintenance_ID|as_crispy_field }}
+      </div>
+    </div>
 
+    <div class="form-row">
 
-            <p class="card-text"><b>Amenities</b></p>
-            <p class="card-text ">{{prop.Property_Guest_Capacity}} guest. {{prop.No_of_Rooms}} beds. {{prop.No_of_Bathrooms}} baths.</p>
-            <p class="card-text ">{{prop.Property_Garage_Capacity}} car parking. {{prop.No_of_Floors}} floors. {{prop.Total_Area}} building area.</p>
-            <p class="card-text ">{{prop.Property_Guest_Capacity}} guest. {{prop.No_of_Rooms}} beds. {{prop.No_of_Bathrooms}} baths.</p>
-            <p class="card-text"><b>Address</b></p>
-                          <p class="card-text ">Street:{{prop.Street}}City:{{prop.City}}State:{{prop.State}}</p>
-
-            <p class="card-text">{{prop.Price}}</p>
-                                      <p class="card-text ">Hosted by {{prop.Property_Host}}</p>
+                 <div class="form-group col-md-8 mb-0">
 
 
-                          <p>
-                          <a href="{% url 'airbnbapp:updateproperty' id=prop.id %}">Update Property |</a>
-                          <a href="{% url 'airbnbapp:deleteproperty' id=prop.id %}">Delete Property |</a>
-                          <a href="{% url 'airbnbapp:addmaintenance' id=prop.id %}">Assign Maintenance Person</a>
-                          </p>
+    <button type="submit" class="btn-btn-success"><i class="fas fa-database"></i>submit</button>
+ </div>
+    </div>
 
 
-
+</form>
           </div>
-                                  </div>
-                             </div>
-
-        </div>
-
-          {% endfor %}
-
+      </div>
+  </div>
