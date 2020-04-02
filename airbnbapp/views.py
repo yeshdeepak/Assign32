@@ -110,7 +110,7 @@ def AddProperty(request,id=0):
           property=Properties.objects.get(pk=id)
           form=PropertiesForm(instance=property)
 
-        return render(request, 'airbnbapp/Addproperty.html', {'form': form})
+        return render(request, 'airbnbapp/AddProperty.html', {'form': form})
 
     else:
         if id==0:
