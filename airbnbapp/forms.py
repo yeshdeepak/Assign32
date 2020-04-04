@@ -42,7 +42,7 @@ class PropertiesForm(forms.ModelForm):
 
             'Property_Image',
             HTML(
-                """{% if form.Property_Image.value %}<img class="img-responsive" src="{{ MEDIA_URL }}{{ form.Property_Image.value }}">{% endif %}""", ),
+                """{% if form.Property_Image.value %}<images class="images-responsive" src="{{ MEDIA_URL }}{{ form.Property_Image.value }}">{% endif %}""", ),
             'flag_featured',
         )
 
