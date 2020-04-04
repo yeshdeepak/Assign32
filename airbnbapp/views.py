@@ -46,7 +46,10 @@ def propertyview(request,id):
         print(request.GET)
         from_date = request.GET.get('checkin')
         to_date = request.GET.get('checkout')
+        adult = request.GET.get('adult')
+        child = request.GET.get('child')
         prop = Properties.objects.get(pk=id)
+        status='confirmed'
         propid=id
         userid=request.user
         print ("user is",userid)
@@ -57,6 +60,8 @@ def propertyview(request,id):
                 reservation = Reservation()
                 reservation.Date_From = datetime.datetime.strptime(from_date, "%m/%d/%Y").strftime('%Y-%m-%d')
                 reservation.Date_To = datetime.datetime.strptime(to_date, "%m/%d/%Y").strftime('%Y-%m-%d')
+                reservation.Status=status
+                reservation.No_Of_Guest=adult
                 reservation.Property_Name = Properties.objects.get(pk=propid)
                 if request.user.is_authenticated:
                      reservation.Customer_Name = CustomUser.objects.get(username=userid)
