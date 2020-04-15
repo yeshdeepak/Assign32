@@ -16,8 +16,6 @@
   <link href="{% static 'vendor/fonts/glyphicons-halflings-regular.svg' %}" rel="stylesheet">
   <link href="{% static 'vendor/fonts/glyphicons-halflings-regular.ttf' %}" rel="stylesheet">
   <link href="{% static 'vendor/fonts/glyphicons-halflings-regular.woff' %}" rel="stylesheet">
-
-
   <title>Property Management</title>
 
 
@@ -103,120 +101,104 @@
       </div>
     </div>
   </nav>
-            <!-- Full Page Intro -->
-          <div class="view" style="background-image: url('/static/Images/home.jpg'); background-repeat: no-repeat; background-size: cover; background-position: center center;">
-                <div class="row mt-5">
-                  <div class="col-md-5 ">
-                      <div class="container">
-                         <div class="card " data-wow-delay="0.3s">
-                            <div class="card-body">
-                                <form method="get">
-                                    <h3 class ="white-text">
-                                      <i class ="white-text"> </i><b>Find a Place to Stay in Omaha</b>
-                                    </h3>
-                                            <div class="form-row">
-                                              <div class="form-group col-12">
-                                               <label for="Location">Where</label>
-                                                 <select id="Location" class="form-control" name="Location">
-                                                    <option selected>AnyWhere</option>
-                                                       {% for prop in props %}
-                                                         <option>{{ prop.County }}</option>
-                                                          {% endfor %}
-                                                 </select>
-                                            </div>
 
-                                            </div>
-                                            <div class="form-row">
+  {% block content %}
 
-                                              <div class="form-group col-md-6">
-                                                 <label for="publishDateMin">Check In</label>
-                                                 <input type="date" class="form-control" id="publishDateMin" name="date_min">
-                                              </div>
-                                              <div class="form-group col-md-6">
-                                                  <label for="publishDateMax">Check Out</label>
-                                                  <input type="date" class="form-control" id="publishDateMax" name="date_max">
-                                              </div>
-                                            </div>
-                                            <div class="form-row">
-                                                <div class="form-group col-md-6">
-                                                <label for="Adult">Adult</label>
-                                                  <select id="Adult" class="form-control" name="adult">
-                                                    <option selected>1</option>
-                                                    <option>1</option>
-                                                    <option>2</option>
-                                                    <option>3</option>
-                                                    <option>4</option>
-                                                    <option>5</option>
-                                                    <option>6</option>
-                                                    <option>7</option>
-
-                                                     </select>
-                                                </div>
-                                            <div class="form-group col-md-6">
-                                                <label for="Children">Children</label>
-                                                  <select id="Children" class="form-control" name="child">
-                                                    <option selected>0</option>
-                                                    <option>1</option>
-                                                    <option>2</option>
-                                                    <option>3</option>
-                                                    <option>4</option>
-                                                    <option>5</option>
-                                                    <option>6</option>
-                                                    <option>7</option>
-                                                     </select>
-                                                </div>
-                                            </div>
-
-                                    <button class="btn btn-primary" type="submit">search</button>
-                                </form>
-
-                            </div>
-                         </div>
-                      </div>
-                  </div>
-                    <div class="col-md-6">
-
-                      {% block content %}
-                      {% endblock %}
-                    </div>
-                  </div>
-
-                </div>
-
-                        <!--Header-->
-
-  <!-- Page Content -->
   <div class="container">
-    <!-- Portfolio Section -->
+            <!-- Full Page Intro -->
+      <div class="row mt-5">
+          <div class="col-md-5 ">
+                   <div class="card " data-wow-delay="0.3s">
+                       <div class="card-body">
+                           <form method="get">
+                               <h3 class ="white-text">
+                                   <i class ="white-text"> </i><b>Find a Place to Stay in Omaha</b>
+                               </h3>
+                               <div class="form-row">
+                                   <div class="form-group col-12">
+                                       <label for="Location">Where</label>
+                                       <select id="Location" class="form-control" name="Location">
+                                           <option selected>AnyWhere</option>
+                                           {% for prop in props %}
+                                              <option>{{ prop.County }}</option>
+                                           {% endfor %}
+                                       </select>
+                                   </div>
 
-    <div class="row">
+                               </div>
+                               <div class="form-row">
 
-          {% for prop in props %}
-                   <div class="col-lg-4 col-sm-6 portfolio-item">
+                                   <div class="form-group col-md-6">
+                                       <label for="publishDateMin">Check In</label>
+                                       <input type="date" class="form-control" id="publishDateMin" name="date_min">
+                                   </div>
+                                   <div class="form-group col-md-6">
+                                       <label for="publishDateMax">Check Out</label>
+                                       <input type="date" class="form-control" id="publishDateMax" name="date_max">
+                                   </div>
+                               </div>
+                               <div class="form-row">
+                                   <div class="form-group col-md-6">
+                                       <label for="Adult">Adult</label>
+                                       <select id="Adult" class="form-control" name="adult">
+                                           <option selected>1</option>
+                                           <option>1</option>
+                                           <option>2</option>
+                                           <option>3</option>
+                                           <option>4</option>
+                                           <option>5</option>
+                                           <option>6</option>
+                                           <option>7</option>
+                                       </select>
+                                   </div>
+                                   <div class="form-group col-md-6">
+                                       <label for="Children">Children</label>
+                                       <select id="Children" class="form-control" name="child">
+                                           <option selected>0</option>
+                                           <option>1</option>
+                                           <option>2</option>
+                                           <option>3</option>
+                                           <option>4</option>
+                                           <option>5</option>
+                                           <option>6</option>
+                                           <option>7</option>
+                                       </select>
+                                   </div>
+                               </div>
 
-                      <div class="card h-100">
+                               <button class="btn btn-primary" type="submit">search</button>
+                           </form>
 
-              <a href="{% url 'airbnbapp:propertyview' id=prop.id %}"><img class="card-img-top" src={{prop.Property_Image.url}} alt=""></a>
-          <div class="card-body">
-            <h4 class="card-title">
-              <a href="{% url 'airbnbapp:propertyview' id=prop.id %}">{{prop.Property_Name}}</a>
-            </h4>
-            <p class="card-text"><b>{{prop.Property_Description}}</b></p>
-            <p class="card-text">{{prop.Price}}</p>
-
+                       </div>
+                   </div>
+              </div>
 
           </div>
-                                  </div>
-                             </div>
-
-
-          {% endfor %}
-
-        </div>
       </div>
-    <!-- /.row -->
+  </div>
+
+  <h4> Popular Places to Stay </h4>
 
 
+  <div class="container-1">
+    <div class="row">
+        {% for prop in props %}
+           <div class="col-lg-4 col-sm-6 portfolio-item">
+               <div class="card h-100">
+               <a href="{% url 'airbnbapp:propertyview' id=prop.id %}"><img class="card-img-top" src={{prop.Property_Image.url}} alt=""></a>
+               <div class="card-body">
+               <h4 class="card-title">
+               <a href="{% url 'airbnbapp:propertyview' id=prop.id %}">{{prop.Property_Name}}</a>
+               </h4>
+               <p class="card-text"><b>{{prop.Property_Description}}</b></p>
+               <p class="card-text">{{prop.Price}}
+               </div>
+           </div>
+           </div>
+        {% endfor %}
+    </div>
+  </div>
+                {% endblock %}
 
 </body>
 
