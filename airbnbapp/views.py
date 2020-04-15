@@ -18,7 +18,8 @@ def base(request):
     props = Properties.objects.all()
     availability = Property_Availability.objects.all()
     reservation = Reservation.objects.all()
-    context = {'props': props}
+    current_date = datetime.date.today().strftime('%Y-%m-%d')
+    context = {'props': props,'current_date':current_date}
     if request.method == 'GET':
         county = request.GET.get('Location')
         adult = request.GET.get('adult')
