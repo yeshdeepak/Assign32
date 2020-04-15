@@ -112,7 +112,7 @@ if USE_S3:
      STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
      AWS_MEDIA_LOCATION = 'media'
      MEDIA_URL = 'https://%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, AWS_MEDIA_LOCATION)
-     DEFAULT_FILE_STORAGE = 'aafield.storage_backends.MediaStorage'  # <-- here is where we reference it
+     DEFAULT_FILE_STORAGE = 'airbnb.storage_backends.MediaStorage'  # <-- here is where we reference it
 
 else:
      MEDIA_URL = '/media/'
