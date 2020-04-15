@@ -6,14 +6,11 @@
 html,
 body,
 header,
-
 .view {
   height: 100%;
 }
-body {
-background-color: lightblue;
 
-}
+
 
 .portfolio-item {
   margin-bottom: 30px;
