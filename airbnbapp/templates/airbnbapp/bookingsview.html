@@ -4,14 +4,18 @@
 <div class="view" style="background-image: url('/static/Images/home.jpg'); background-repeat: no-repeat; background-size: cover; background-position: center center;">
 
   <div class="container">
-            <!-- Full Page Intro -->
-
   <div class="row pt-5 pl-5">
     <div class="col-md-10 ">
 
                   <div class="panel panel-default" style="width: 900px">
                    <div class="panel-body">
-                          <table class="table table-sm">
+                                       <div class="row">
+                 <h2 style="padding-left: 15Px">Bookings</h2>
+                </div>
+
+               <table class="table table-striped table-bordered ">
+                                   <thead>
+
                               <tr>
                                   <th> Reservation Id</th>
                                   <th> Property Name</th>
@@ -22,7 +26,11 @@
                                   <th>Cancel</th>
 
                               </tr>
+                                              </thead>
+
                               <tr>
+                                                  <tbody>
+
                                   {% for booking in bookings %}
                                    <tr>
                                    <td>{{booking.id}}</td>
@@ -42,6 +50,8 @@
 
                           </tr>
                                   {% endfor %}
+                                                  </tbody>
+
 
 
                               </tr>
