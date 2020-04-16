@@ -8,7 +8,12 @@
                   <!--Grid column-->
                   <!--Grid column-->
 
-<div class="container">
+<div class="view" style="background-image: url('/static/Images/home.jpg'); background-repeat: no-repeat; background-size: cover; background-position: center center;">
+
+  <div class="container">
+            <!-- Full Page Intro -->
+      <div class="row mt-5">
+          <div class="col-md-5 ">
 
     <div class="card " data-wow-delay="0.3s">
         <h4 class="card-header">Hello {{ user.get_username }},</h4>
@@ -22,6 +27,11 @@
             <a class="btn btn-primary btn-lg float-right" href="{% url 'airbnbapp:viewbookings' id=user.id %}" role="button">My Bookings</a>
 
     </div>
+    </div>
+          </div>
+      </div>
+  </div>
+</div>
   </p>
 </div>
 </div>
