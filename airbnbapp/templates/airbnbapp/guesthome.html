@@ -32,9 +32,25 @@
       </div>
   </div>
 </div>
-  </p>
-</div>
-</div>
+<p></p><p></p><p></p>
+  <div class="container-1">
+    <div class="row">
+        {% for prop in props %}
+           <div class="col-lg-4 col-sm-6 portfolio-item">
+               <div class="card h-100">
+               <a href="{% url 'airbnbapp:propertyview' id=prop.id %}"><img class="card-img-top" src={{prop.Property_Image.url}} alt=""></a>
+               <div class="card-body">
+               <h4 class="card-title">
+               <a href="{% url 'airbnbapp:propertyview' id=prop.id %}">{{prop.Property_Name}}</a>
+               </h4>
+               <p class="card-text"><b>{{prop.Property_Description}}</b></p>
+               <p class="card-text">{{prop.Price}}
+               </div>
+           </div>
+           </div>
+        {% endfor %}
+    </div>
+  </div>
 
 
 {% endblock %}
