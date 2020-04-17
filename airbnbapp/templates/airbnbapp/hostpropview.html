@@ -8,24 +8,19 @@
 
 
                    <div class="col-lg-4 col-sm-6 portfolio-item">
-                      <div class="card h-100 "style="width: 800px;">
-                          <div class="card-header"><h5>{{prop.Property_Name}}</h5></div>
+                      <div class="card  "style="width: 500px; height:700px">
+                          <div class="card-header"><h5>{{prop.Property_Name}}-{{prop.Price}}</h5></div>
 
                       <div class="card-body">
-                                                 <h4 class="card-title">
-            </h4>
             <p class="card-text"><b>{{prop.Property_Description}}</b></p>
-                                                 <a href=#><img class="card-img-top" src={{prop.Property_Image.url}} alt=""></a>
-
+                          <a href=#><img class="card-img-top" src={{prop.Property_Image.url}} alt=""></a>
 
             <p class="card-text"><b>Amenities</b></p>
             <p class="card-text ">{{prop.Property_Guest_Capacity}} guest. {{prop.No_of_Rooms}} beds. {{prop.No_of_Bathrooms}} baths.</p>
             <p class="card-text ">{{prop.Garage_Capacity}} car parking. {{prop.No_of_Floors}} floors. {{prop.Total_Area}} building area.</p>
-            <p class="card-text ">{{prop.Property_Guest_Capacity}} guest. {{prop.No_of_Rooms}} beds. {{prop.No_of_Bathrooms}} baths.</p>
             <p class="card-text"><b>Address</b></p>
                           <p class="card-text ">Street:{{prop.Property_Street}}|City:{{prop.Property_City}}|State:{{prop.Property_State}}</p>
 
-            <p class="card-text">{{prop.Price}}</p>
                                       <p class="card-text ">Hosted by {{prop.Property_Host}}</p>
 
                           <p>
