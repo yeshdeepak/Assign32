@@ -11,7 +11,9 @@
 <div class="view" style="background-image: url('/static/Images/home.jpg'); background-repeat: no-repeat; background-size: cover; background-position: center center;">
 
 <div class="container">
-               <div class="card   " data-wow-delay="0.3s">
+                          <div class="row pt-5 pl-5">
+
+               <div class="card"style="height:400px;width:500px">
                                       <h5 class="card-header">Login</h5>
 
   <div class="card-body pt-5 pl-3">
@@ -20,6 +22,7 @@
       {{ form.as_p }}
       {% csrf_token %}
       <input type="hidden" name="next" value="{{ next }}" />
+
       <p><input type="submit" value="Log-in"></p>
     </form>
     <p><a href="{% url "password_reset" %}">Forgotten your  password?</a></p>
