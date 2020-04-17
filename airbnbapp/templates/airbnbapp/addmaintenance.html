@@ -1,118 +1,15 @@
-{% load staticfiles %}
+
+{% extends 'base.html' %}
 {% load crispy_forms_tags %}
 
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-
-  <!-- Required meta tags-->
-    <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.js"></script>
-  <link href="{% static 'vendor/fonts/glyphicons-halflings-regular.eot' %}" rel="stylesheet">
-  <link href="{% static 'vendor/fonts/glyphicons-halflings-regular.svg' %}" rel="stylesheet">
-  <link href="{% static 'vendor/fonts/glyphicons-halflings-regular.ttf' %}" rel="stylesheet">
-  <link href="{% static 'vendor/fonts/glyphicons-halflings-regular.woff' %}" rel="stylesheet">
-
-
-  <title>Property Management</title>
-
-
-    <!-- Font special for pages-->
-    <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i" rel="stylesheet">
-
-  <!-- Icons font CSS-->
-    <link href="{% static 'vendor/mdi-font/css/material-design-iconic-font.min.css' %}" rel="stylesheet" media="all">
-    <link href="{% static 'vendor/font-awesome-4.7/css/font-awesome.min.css' %}" rel="stylesheet" media="all">
-
-  <!-- Bootstrap core CSS -->
-
-  <!-- Custom styles for this template -->
-  <link href="{% static 'css/modern-business.css' %}" rel="stylesheet">
-  <link href="{% static 'vendor/bootstrap/css/datepicker.css' %}" rel="stylesheet">
-
-
-
-<!-- Bootstrap core JavaScript -->
-  <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
-  <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
-  <script src="{% static 'vendor/bootstrap/js/main.js' %}"></script>
-  <script src="{% static 'vendor/bootstrap/js/bootstrap-datepicker.js' %}"></script>
-  <script>
-      $(function() {
-        $('.datepicker').datepicker();
-        });
-  </script>
-
-<style>
-.jumbotron {
-  padding-top: 4px !important;
-  padding-bottom: 4px !important;
-}
-
-</style>
-
-</head>
-
-<body>
-
-  <!-- Navigation -->
-  <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
-    <div class="container">
-      <a class="navbar-brand" href=/>Property Rental Management System</a>
-      <div class="collapse navbar-collapse" id="navbarResponsive">
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'airbnbapp:aboutus' %}">About</a>
-
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'airbnbapp:contact' %}">Contact</a>
-          </li>
-          <li class="nav-item">
-              {% if user.is_authenticated %}
-                        <li class="nav-item">
-
-                                <a class="nav-link" href=/home>Home</a>
-                        </li>
-          <li class="nav-item">
-
-
-                  <a class="nav-link" href="{% url 'logout' %}">Logout</a>
-          </li>
-
-
-              {% else %}
-                  <a class="nav-link" href="{% url 'login' %}">Login</a>
-                  <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPortfolio" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Sign Up
-                  </a>
-                  <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownPortfolio">
-                   <a class="dropdown-item" href="{% url 'guest_register' %}">Guest</a>
-                   <a class="dropdown-item" href="{% url 'host_register' %}">Host</a>
-                   <a class="dropdown-item" href="{% url 'maintenance_register' %}">Maintenance</a>
-                  </div>
-
-              {% endif %}
-           </li>
-
-          </li>
-
-
-
-
-          </ul>
-      </div>
-    </div>
-  </nav>
+  {% block content %}
+<div class="view" style="background-image: url('/static/Images/home.jpg'); background-repeat: no-repeat; background-size: cover; background-position: center center;">
 
   <div class="container">
       <div class="row pt-5">
+                                   <div class="card"style="height:400px;width:700px">
+                                                                   <h5 class="card-header">Assign Maintenance</h5>
+
           <div class="card-body">
 
             <!-- Full Page Intro -->
@@ -144,9 +41,8 @@
       </div>
     </div>
 
-    <div class="form-row">
 
-                 <div class="form-group col-md-8 mb-0">
+                 <div class="text-center" >
 
 
     <button type="submit" class="btn-btn-success"><i class="fas fa-database"></i>submit</button>
@@ -158,3 +54,5 @@
           </div>
       </div>
   </div>
+</div>
+{% endblock %}
