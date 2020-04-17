@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<body>
+<div class="view" style="background-image: url('/static/Images/home.jpg'); background-repeat: no-repeat; background-size: cover; background-position: center center;">
+
+<div class="container-1">
+  <div class="row pt-5 pl-5">
+    <div class="col-md-10 ">
+       <div class="card" style="width: 900px">
+           <div class="card-body">
+    {% if property_status %}
+        <div class="row">
+            <h2 style="padding-left: 15Px">Properties assigned to you for maintenance</h2>
+        </div>
+        <div>
+            <table class="table table-striped table-bordered ">
+                <thead>
+                <tr class="bg-info">
+                    <th>Property Name</th>
+                    <th>Street</th>
+                    <th>City</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for property_status in props %}
+                    <tr>
+                        <td>{{ property_status.Property_Name }}</td>
+                        <td>{{ property_status.Street}}</td>
+                        <td>{{ property_status.City }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% else %}
+        <p style="font-size:25px;">No Properties assigned for maintenance</p>
+    {% endif %}
+</div>
+       </div>
+   </div>
+ </div>
+</div>
+</body>
+</html>
+{% endblock %}
