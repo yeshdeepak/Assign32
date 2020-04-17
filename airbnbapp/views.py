@@ -169,3 +169,9 @@ def home(request):
         props = Properties.objects.all()
         return render(request, 'airbnbapp/maintenancepersonhome.html',{'props': props})
 
+
+
+def hostpropview(request,id):
+    prop = Properties.objects.get(pk=id)
+    context = {'prop': prop}
+    return render(request, 'airbnbapp/hostpropview.html', context)

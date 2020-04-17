@@ -9,6 +9,7 @@ urlpatterns=[
     path('property/<id>/', views.propertyview, name='propertyview'),
     path('contact/', views.contact, name='contact'),
     path('bookings/<id>/', views.viewbookings, name='viewbookings'),
+    path('myprop/<id>/', views.hostpropview, name='hostpropview'),
     path('cancel/<id>/', views.cancelbooking, name='cancelbooking'),
     re_path(r'^home/AddProperty', views.AddProperty, name='Addproperty'),
     path('property/update/<id>', views.AddProperty, name='updateproperty'),
