@@ -4,12 +4,10 @@
 <div class="view" style="background-image: url('/static/Images/home.jpg'); background-repeat: no-repeat; background-size: cover; background-position: center center;">
 
   <div class="container">
-            <!-- Full Page Intro -->
+           <div class="card " data-wow-delay="0.3s">
+        <h4 class="card-header">Hello {{ user.get_username }},</h4>
 
-            <!-- Full Page Intro -->
-      <div class="col-md-9 ">
-<div class="card pt-5" style="width: 900px">
-      <h4 >Hello{{ props.Property_Host }},</h4>
+        <h5 class="card-body">
   <p >Please scroll below to view your properties with us.</p>
    <p class="lead">
     <a class="btn btn-primary btn-lg" href="{% url 'airbnbapp:Addproperty' %}" role="button">Add Properties</a>
@@ -21,15 +19,13 @@
     <div class="row">
         {% for prop in props %}
            <div class="col-lg-4 col-sm-6 portfolio-item">
-               <div class="card h-100">
+               <div class="card" style="height:400px">
+                   <h4 class="card-header"><a href="{% url 'airbnbapp:hostpropview' id=prop.id %}">{{prop.Property_Name}}</a></h4>
+                        <div class="card-body">
+
                <a href="{% url 'airbnbapp:hostpropview' id=prop.id %}"><img class="card-img-top" src={{prop.Property_Image.url}} alt=""></a>
-               <div class="card-body">
-               <h4 class="card-title">
-               <a href="{% url 'airbnbapp:hostpropview' id=prop.id %}">{{prop.Property_Name}}</a>
-               </h4>
-               <p class="card-text"><b>{{prop.Property_Description}}</b></p>
-               <p class="card-text">{{prop.Price}}
-               </div>
+                        </div>
+
            </div>
            </div>
         {% endfor %}
