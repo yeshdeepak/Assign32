@@ -6,7 +6,7 @@ psycopg2==2.7.5
 pytz==2018.5
 whitenoise==4.0
 django-taggit==0.22.2
-Pillow==7.0.0
+Pillow==9.0.0
 django-filter==2.2
 braintree==4.0.0
 boto3
